@@ -26,9 +26,17 @@
                                 <animations/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="kdF-Gg-gzL"/>
-                                    <barButtonItem systemItem="add" id="DF3-mu-WUS"/>
+                                    <barButtonItem systemItem="add" id="DF3-mu-WUS">
+                                        <connections>
+                                            <action selector="libraryButton:" destination="BYZ-38-t0r" id="EZl-bd-r0B"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem width="40" style="plain" systemItem="fixedSpace" id="YCh-DW-Rrw"/>
-                                    <barButtonItem title="Item" systemItem="camera" id="r45-qe-W5z"/>
+                                    <barButtonItem title="Item" systemItem="camera" id="r45-qe-W5z">
+                                        <connections>
+                                            <action selector="cameraButton:" destination="BYZ-38-t0r" id="mMu-Wx-I3T"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="77F-wf-hvd"/>
                                 </items>
                             </toolbar>
@@ -37,7 +45,11 @@
                                 <animations/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="on8-z5-BDT"/>
-                                    <barButtonItem systemItem="action" id="qE0-v5-Z3I"/>
+                                    <barButtonItem systemItem="action" id="qE0-v5-Z3I">
+                                        <connections>
+                                            <action selector="shareButton:" destination="BYZ-38-t0r" id="USb-GD-AJI"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="s4v-kd-YBl"/>
                                 </items>
                             </toolbar>
@@ -129,6 +141,13 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="bottomTextField" destination="9p6-IQ-gEX" id="CVI-Nh-ROl"/>
+                        <outlet property="cameraButton" destination="r45-qe-W5z" id="0Lk-kk-LVO"/>
+                        <outlet property="imageView" destination="kIF-g8-sPX" id="GuA-vc-A9p"/>
+                        <outlet property="shareButton" destination="qE0-v5-Z3I" id="8dg-eC-T6A"/>
+                        <outlet property="topTextField" destination="edA-Ub-bHW" id="QyD-lE-2YR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
