@@ -14,18 +14,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var shareButton: UIBarButtonItem!
-
+    let textFieldDelegate = TextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         shareButton.enabled = false
+        imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        
+        bottomTextField.defaultTextAttributes = TextField().memeTextAttributes
+        topTextField.defaultTextAttributes = TextField().memeTextAttributes
+        
+        topTextField.delegate = textFieldDelegate
+        bottomTextField.delegate = textFieldDelegate
+        
+        topTextField.text = "TOP"
+        bottomTextField.text = "BOTTOM"
     }
     
     override func viewWillAppear(animated: Bool) {
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
     }
-
-    
     
     @IBAction func libraryButton(sender: UIBarButtonItem) {
         pickAnImage(fromLibrary: true)
@@ -57,10 +65,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             imageView.image = image
             shareButton.enabled = true
         }
-        else {
-            
-            print("image cannot be selected properly")
-        }
+        else { print("image cannot be selected properly") }
         
         dismissViewControllerAnimated(true, completion: nil)
     }

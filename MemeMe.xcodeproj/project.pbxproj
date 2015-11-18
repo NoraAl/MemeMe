@@ -14,6 +14,7 @@
 		0D27AE611BFB8C6300C60BD7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D27AE5F1BFB8C6300C60BD7 /* LaunchScreen.storyboard */; };
 		0D27AE6C1BFB8C6400C60BD7 /* MemeMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D27AE6B1BFB8C6400C60BD7 /* MemeMeTests.swift */; };
 		0D27AE771BFB8C6400C60BD7 /* MemeMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D27AE761BFB8C6400C60BD7 /* MemeMeUITests.swift */; };
+		0D27AEC11BFBED9A00C60BD7 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D27AEC01BFBED9A00C60BD7 /* TextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		0D27AE721BFB8C6400C60BD7 /* MemeMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemeMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D27AE761BFB8C6400C60BD7 /* MemeMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeMeUITests.swift; sourceTree = "<group>"; };
 		0D27AE781BFB8C6400C60BD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D27AEC01BFBED9A00C60BD7 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				0D27AE5D1BFB8C6300C60BD7 /* Assets.xcassets */,
 				0D27AE5F1BFB8C6300C60BD7 /* LaunchScreen.storyboard */,
 				0D27AE621BFB8C6300C60BD7 /* Info.plist */,
+				0D27AEC01BFBED9A00C60BD7 /* TextField.swift */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D27AEC11BFBED9A00C60BD7 /* TextField.swift in Sources */,
 				0D27AE591BFB8C6300C60BD7 /* ViewController.swift in Sources */,
 				0D27AE571BFB8C6300C60BD7 /* AppDelegate.swift in Sources */,
 			);
