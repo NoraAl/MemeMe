@@ -45,11 +45,7 @@
                                 <animations/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="on8-z5-BDT"/>
-                                    <barButtonItem systemItem="action" id="qE0-v5-Z3I">
-                                        <connections>
-                                            <action selector="shareButton:" destination="BYZ-38-t0r" id="USb-GD-AJI"/>
-                                        </connections>
-                                    </barButtonItem>
+                                    <barButtonItem systemItem="action" id="qE0-v5-Z3I"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="s4v-kd-YBl"/>
                                 </items>
                             </toolbar>
@@ -121,6 +117,15 @@
                                 <exclude reference="edA-Ub-bHW"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="Vir-Gw-GiO"/>
+                                <exclude reference="45g-eB-cEt"/>
+                                <exclude reference="QiC-kY-TsP"/>
+                                <exclude reference="c8S-f2-CwY"/>
+                                <exclude reference="nT2-kW-d7y"/>
+                                <exclude reference="3Jg-jv-huC"/>
+                                <exclude reference="8EE-Kb-w14"/>
+                                <exclude reference="SfJ-nH-syH"/>
+                                <exclude reference="imx-hf-pOE"/>
                                 <exclude reference="JOc-9N-08d"/>
                                 <exclude reference="GFM-iW-Oh5"/>
                                 <exclude reference="Oqf-VT-Tse"/>
@@ -128,15 +133,6 @@
                                 <exclude reference="cUy-bW-q5c"/>
                                 <exclude reference="cf9-rW-BUS"/>
                                 <exclude reference="pge-d5-ggq"/>
-                                <exclude reference="45g-eB-cEt"/>
-                                <exclude reference="QiC-kY-TsP"/>
-                                <exclude reference="c8S-f2-CwY"/>
-                                <exclude reference="nT2-kW-d7y"/>
-                                <exclude reference="Vir-Gw-GiO"/>
-                                <exclude reference="3Jg-jv-huC"/>
-                                <exclude reference="8EE-Kb-w14"/>
-                                <exclude reference="SfJ-nH-syH"/>
-                                <exclude reference="imx-hf-pOE"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -148,6 +144,15 @@
                                 <include reference="edA-Ub-bHW"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="Vir-Gw-GiO"/>
+                                <include reference="45g-eB-cEt"/>
+                                <include reference="QiC-kY-TsP"/>
+                                <include reference="c8S-f2-CwY"/>
+                                <include reference="nT2-kW-d7y"/>
+                                <include reference="3Jg-jv-huC"/>
+                                <include reference="8EE-Kb-w14"/>
+                                <include reference="SfJ-nH-syH"/>
+                                <include reference="imx-hf-pOE"/>
                                 <include reference="JOc-9N-08d"/>
                                 <include reference="GFM-iW-Oh5"/>
                                 <include reference="Oqf-VT-Tse"/>
@@ -155,15 +160,6 @@
                                 <include reference="cUy-bW-q5c"/>
                                 <include reference="cf9-rW-BUS"/>
                                 <include reference="pge-d5-ggq"/>
-                                <include reference="45g-eB-cEt"/>
-                                <include reference="QiC-kY-TsP"/>
-                                <include reference="c8S-f2-CwY"/>
-                                <include reference="nT2-kW-d7y"/>
-                                <include reference="Vir-Gw-GiO"/>
-                                <include reference="3Jg-jv-huC"/>
-                                <include reference="8EE-Kb-w14"/>
-                                <include reference="SfJ-nH-syH"/>
-                                <include reference="imx-hf-pOE"/>
                             </mask>
                         </variation>
                     </view>
@@ -171,7 +167,7 @@
                         <outlet property="bottomTextField" destination="9p6-IQ-gEX" id="CVI-Nh-ROl"/>
                         <outlet property="cameraButton" destination="r45-qe-W5z" id="0Lk-kk-LVO"/>
                         <outlet property="imageView" destination="kIF-g8-sPX" id="GuA-vc-A9p"/>
-                        <outlet property="shareButton" destination="qE0-v5-Z3I" id="8dg-eC-T6A"/>
+                        <outlet property="shareButton" destination="qE0-v5-Z3I" id="Ydy-bt-RrM"/>
                         <outlet property="topTextField" destination="edA-Ub-bHW" id="QyD-lE-2YR"/>
                     </connections>
                 </viewController>

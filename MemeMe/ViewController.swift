@@ -32,7 +32,38 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     override func viewWillAppear(animated: Bool) {
+        
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+        self.subscribeToKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.unsubscribeToKeyboardNotifications()
+    }
+    
+    func keyboardWillShow(notification: NSNotification){
+        self.view.frame.origin.y -= getKeyboardHeight(notification)
+    }
+    
+    func keyboardWillHide(notification: NSNotification){
+        self.view.frame.origin.y += getKeyboardHeight(notification)
+    }
+    
+    func subscribeToKeyboardNotifications() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func unsubscribeToKeyboardNotifications(){
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        return keyboardSize.CGRectValue().height
     }
     
     @IBAction func libraryButton(sender: UIBarButtonItem) {
@@ -43,9 +74,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         pickAnImage(fromLibrary: false)
     }
 
-    @IBAction func shareButton(sender: UIBarButtonItem) {
-    }
-    
     func pickAnImage(fromLibrary fromLibrary: Bool) {
         let imagePickerViewController = UIImagePickerController()
         imagePickerViewController.delegate = self

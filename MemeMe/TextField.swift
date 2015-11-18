@@ -18,22 +18,24 @@ extension NSParagraphStyle {
 }
 
 class TextField: NSObject, UITextFieldDelegate {
-    
     let memeTextAttributes = [
         NSForegroundColorAttributeName : UIColor.whiteColor(),
         NSStrokeColorAttributeName : UIColor.blackColor(),
         NSStrokeWidthAttributeName : -3.0,
         NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 30)!,
-        
         NSParagraphStyleAttributeName: NSParagraphStyle().centerParagraphStyle()
     ]
+    
     func textFieldDidBeginEditing(textField: UITextField) {
-        textField.text = ""
+        if(textField.text == "TOP"||textField.text == "BOTTOM"){
+            textField.text = ""
+        } else {
+            textField.text = textField.text!
+        }
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
-
 }
