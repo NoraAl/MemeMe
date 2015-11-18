@@ -8,6 +8,8 @@
 
 import UIKit
 
+var bottomTextFieldIsBeingEdited = false
+
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var topTextField: UITextField!
@@ -43,11 +45,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func keyboardWillShow(notification: NSNotification){
-        self.view.frame.origin.y -= getKeyboardHeight(notification)
+        if bottomTextFieldIsBeingEdited {
+            view.frame.origin.y -= getKeyboardHeight(notification)}
     }
     
     func keyboardWillHide(notification: NSNotification){
-        self.view.frame.origin.y += getKeyboardHeight(notification)
+        if bottomTextFieldIsBeingEdited {
+            view.frame.origin.y += getKeyboardHeight(notification)}
     }
     
     func subscribeToKeyboardNotifications() {

@@ -27,10 +27,16 @@ class TextField: NSObject, UITextFieldDelegate {
     ]
     
     func textFieldDidBeginEditing(textField: UITextField) {
+        
         if(textField.text == "TOP"||textField.text == "BOTTOM"){
             textField.text = ""
         } else {
             textField.text = textField.text!
+        }
+        if(textField.restorationIdentifier == "bottomTextField"){
+            bottomTextFieldIsBeingEdited = true
+        } else {
+            bottomTextFieldIsBeingEdited = false
         }
     }
     
