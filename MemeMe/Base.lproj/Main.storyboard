@@ -45,7 +45,11 @@
                                 <animations/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="on8-z5-BDT"/>
-                                    <barButtonItem systemItem="action" id="qE0-v5-Z3I"/>
+                                    <barButtonItem systemItem="action" id="qE0-v5-Z3I">
+                                        <connections>
+                                            <action selector="shareAction:" destination="BYZ-38-t0r" id="waH-Mw-Low"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="s4v-kd-YBl"/>
                                 </items>
                             </toolbar>
@@ -164,10 +168,12 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="bottomBar" destination="2oo-SZ-0Ko" id="fUL-kz-Tme"/>
                         <outlet property="bottomTextField" destination="9p6-IQ-gEX" id="CVI-Nh-ROl"/>
                         <outlet property="cameraButton" destination="r45-qe-W5z" id="0Lk-kk-LVO"/>
                         <outlet property="imageView" destination="kIF-g8-sPX" id="GuA-vc-A9p"/>
                         <outlet property="shareButton" destination="qE0-v5-Z3I" id="Ydy-bt-RrM"/>
+                        <outlet property="topBar" destination="Jxj-Nv-YdM" id="uMw-Vo-yXW"/>
                         <outlet property="topTextField" destination="edA-Ub-bHW" id="QyD-lE-2YR"/>
                     </connections>
                 </viewController>

@@ -16,6 +16,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var topBar: UIToolbar!
+    @IBOutlet weak var bottomBar: UIToolbar!
+    
     let textFieldDelegate = TextField()
     
     override func viewDidLoad() {
@@ -106,4 +109,45 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismissViewControllerAnimated(true, completion: nil)
     }
 
+    @IBAction func shareAction(sender: UIBarButtonItem) {let image = generateMemedImage()
+        let shareViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        presentViewController(shareViewController, animated: true, completion: nil)
+        
+        shareViewController.completionWithItemsHandler = { (a:String?, completed:Bool, r:[AnyObject]?, d:NSError?)->Void in
+            if(completed){
+                self.save()
+                print("Sharing is done.")
+                shareViewController.dismissViewControllerAnimated(true, completion: nil )
+                print("Sharing view is dismissed.")
+            } else {
+                print("Sharing is canceled.")
+            }
+            
+        }
+    }
+    
+    func save() {
+        
+        let meme = Meme(top: topTextField.text!, bottom: bottomTextField.text!, image: imageView.image!, memedImage: generateMemedImage())
+        print("Meme object is saved:\n", meme)
+    }
+    
+    func generateMemedImage() -> UIImage {
+        
+        topBar.hidden = true
+        bottomBar.hidden = true
+        
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        self.view.drawViewHierarchyInRect(self.view.frame,
+            afterScreenUpdates: true)
+        let memedImage : UIImage =
+        UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        topBar.hidden = false
+        bottomBar.hidden = false
+        
+        return memedImage
+    }
 }
