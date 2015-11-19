@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+var framWidth :CGFloat = 0.0
 var bottomTextFieldIsBeingEdited = false
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -34,6 +34,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         topTextField.text = "TOP"
         bottomTextField.text = "BOTTOM"
+        framWidth = self.view.frame.maxX
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -116,9 +117,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         shareViewController.completionWithItemsHandler = { (a:String?, completed:Bool, r:[AnyObject]?, d:NSError?)->Void in
             if(completed){
                 self.save()
-                print("Sharing is done.")
                 shareViewController.dismissViewControllerAnimated(true, completion: nil )
-                print("Sharing view is dismissed.")
             } else {
                 print("Sharing is canceled.")
             }

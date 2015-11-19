@@ -13,6 +13,7 @@ extension NSParagraphStyle {
     func centerParagraphStyle() -> NSParagraphStyle {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .Center
+        
         return paragraphStyle.copy() as! NSParagraphStyle
     }
 }
@@ -28,20 +29,49 @@ class TextField: NSObject, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(textField: UITextField) {
         
-        if(textField.text == "TOP"||textField.text == "BOTTOM"){
-            textField.text = ""
-        } else {
-            textField.text = textField.text!
-        }
-        if(textField.restorationIdentifier == "bottomTextField"){
+        
+        if (textField.restorationIdentifier == "bottomTextField"){
             bottomTextFieldIsBeingEdited = true
+            
+            if (textField.text == "BOTTOM"){
+                textField.text = ""
+            } else {
+                textField.text = textField.text!
+            }
+            
         } else {
             bottomTextFieldIsBeingEdited = false
+            
+            if (textField.text == "TOP"){
+                textField.text = ""
+            } else {
+                textField.text = textField.text!
+            }
+        }
+    }
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if((textField.textInputView.frame.maxX > framWidth)){
+            return false
+        }
+        
+        return true
+    }
+    func textFieldDidEndEditing(textField: UITextField){
+        if (textField.restorationIdentifier == "bottomTextField"){
+            if (textField.text == ""){
+                textField.text = "BOTTOM"
+            }
+        } else {
+            if (textField.text == ""){
+                textField.text = "TOP"
+            }
         }
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
         textField.resignFirstResponder()
         return true
     }
+    
 }
