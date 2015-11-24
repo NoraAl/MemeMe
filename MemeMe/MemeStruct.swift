@@ -10,13 +10,14 @@ import UIKit
 
 struct Meme{
     var bottom, top: String
-    var image, memedImage: UIImage
+    var image, board, memedImage: UIImage
     
     init (top:String, bottom: String, image:
-        UIImage, memedImage: UIImage){
+        UIImage,board: UIImage, memedImage: UIImage){
             self.top = top
             self.bottom = bottom
             self.image = image
+            self.board = board
             self.memedImage = memedImage
     }
 }

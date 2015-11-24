@@ -7,24 +7,37 @@
 //
 
 import UIKit
-var framWidth :CGFloat = 0.0
+
 var bottomTextFieldIsBeingEdited = false
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    @IBOutlet weak var imageView: UIImageView!
+
+class ViewController: UIViewController{
+    
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var topBar: UIToolbar!
     @IBOutlet weak var bottomBar: UIToolbar!
+    @IBOutlet weak var undoButton: UIButton!
     
+    @IBOutlet var board: Board!
+    
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var doneButton: UIButton!
+    
+    
+    let imagePickerDelegate = ImagePickerDelegate()
     let textFieldDelegate = TextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bottomTextFieldIsBeingEdited = false
         shareButton.enabled = false
-        imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        
+        drawingView(shown: false)
+        
+        //imageView.contentMode = UIViewContentMode.ScaleAspectFit
         
         bottomTextField.defaultTextAttributes = TextField().memeTextAttributes
         topTextField.defaultTextAttributes = TextField().memeTextAttributes
@@ -34,11 +47,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         topTextField.text = "TOP"
         bottomTextField.text = "BOTTOM"
-        framWidth = self.view.frame.maxX
+    }
+    
+    func drawingView(shown shown: Bool){
+        if shown {
+            undoButton.enabled = true
+            undoButton.hidden = false
+            doneButton.enabled = true
+            doneButton.hidden = false
+            
+        } else {
+            undoButton.enabled = false
+            undoButton.hidden = true
+            doneButton.enabled = false
+            doneButton.hidden = true
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
-        
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         self.subscribeToKeyboardNotifications()
     }
@@ -75,45 +101,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func libraryButton(sender: UIBarButtonItem) {
-        pickAnImage(fromLibrary: true)
+        imagePickerDelegate.pickAnImage(fromLibrary: true, imageView: imageView, viewController: self,shareButton: shareButton)
     }
     
     @IBAction func cameraButton(sender: UIBarButtonItem) {
-        pickAnImage(fromLibrary: false)
+        imagePickerDelegate.pickAnImage(fromLibrary: false, imageView: imageView, viewController: self,shareButton: shareButton)
     }
 
-    func pickAnImage(fromLibrary fromLibrary: Bool) {
-        let imagePickerViewController = UIImagePickerController()
-        imagePickerViewController.delegate = self
-        
-        if(fromLibrary){
-            imagePickerViewController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        }
-        else {
-            imagePickerViewController.sourceType = UIImagePickerControllerSourceType.Camera
-        }
-        presentViewController(imagePickerViewController, animated: true, completion: nil)
-    }
-    
-    //imagePickerViewController delegate mehtods
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]){
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            imageView.image = image
-            shareButton.enabled = true
-        }
-        else { print("image cannot be selected properly") }
-        
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(picker: UIImagePickerController){
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-
-    @IBAction func shareAction(sender: UIBarButtonItem) {let image = generateMemedImage()
+    @IBAction func shareAction(sender: UIBarButtonItem) {
+        let image = generateMemedImage()
         let shareViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         presentViewController(shareViewController, animated: true, completion: nil)
-        
         shareViewController.completionWithItemsHandler = { (a:String?, completed:Bool, r:[AnyObject]?, d:NSError?)->Void in
             if(completed){
                 self.save()
@@ -121,32 +119,80 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             } else {
                 print("Sharing is canceled.")
             }
-            
         }
     }
     
     func save() {
-        
-        let meme = Meme(top: topTextField.text!, bottom: bottomTextField.text!, image: imageView.image!, memedImage: generateMemedImage())
+        let meme = Meme(top: topTextField.text!, bottom: bottomTextField.text!, image: imageView.image!,board: board.takeImage(), memedImage: generateMemedImage())
         print("Meme object is saved:\n", meme)
     }
     
+    func toggleBars(hide hide: Bool){
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDelay(0.3)
+        if (hide){
+            topBar.alpha = 0
+            bottomBar.alpha = 0
+        } else {
+            topBar.alpha = 1
+            bottomBar.alpha = 1}
+        UIView.commitAnimations()
+    }
+    
     func generateMemedImage() -> UIImage {
-        
-        topBar.hidden = true
-        bottomBar.hidden = true
-        
+        toggleBars(hide: true)
+        drawingView(shown: false)
+        var memedImage = UIImage()
         // Render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        self.view.drawViewHierarchyInRect(self.view.frame,
-            afterScreenUpdates: true)
-        let memedImage : UIImage =
-        UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        topBar.hidden = false
-        bottomBar.hidden = false
-        
+        delay(0.9){
+            UIGraphicsBeginImageContext(self.view.frame.size)
+            self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+            memedImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+        }
+        toggleBars(hide: false)
         return memedImage
     }
+    
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
+    }
+    
+    @IBAction func doneAcrion(sender: UIButton) {
+        drawingView(shown: false)
+        toggleBars(hide: false)
+        board.brush = nil
+        
+    }
+    @IBAction func undoAction(sender: UIButton) {
+        board.undo()
+    }
+    
+    @IBAction func draw(sender: UIBarButtonItem) {
+        toggleBars(hide: true)
+        delay(0.4){
+            self.drawingView(shown: true)
+        }
+        
+        board.brush = PencilBrush()
+        
+        self.board.drawingStateChangedBlock = {(state: DrawingState) -> () in
+            if state != .Moved {
+                UIView.beginAnimations(nil, context: nil)
+                if state == .Began {
+                    self.undoButton.alpha = 0
+                } else if state == .Ended {
+                    UIView.setAnimationDelay(1.0)
+                    self.undoButton.alpha = 1
+                }
+                UIView.commitAnimations()
+            }
+        }
+    }
 }
+
