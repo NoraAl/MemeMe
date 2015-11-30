@@ -5,13 +5,7 @@
 //  Created by ZhangAo on 15-2-15.
 //  Copyright (c) 2015年 zhangao. All rights reserved.
 //
-//
-//  Board.swift
-//  DrawingBoard
-//
-//  Created by ZhangAo on 15-2-15.
-//  Copyright (c) 2015年 zhangao. All rights reserved.
-//
+
 
 import UIKit
 
@@ -35,25 +29,16 @@ class Board: UIImageView {
             }
         }
         
-        var canRedo: Bool {
-            get {
-                return index + 1 < images.count
-            }
-        }
-        
         func addImage(image: UIImage) {
-            // 当往这个 Manager 中增加图片的时候，先把指针后面的图片全部清掉，
-            // 这与我们之前在 drawingImage 方法中对 redoImages 的处理是一样的
             if index < images.count - 1 {
                 images[index + 1 ... images.count - 1] = []
             }
             
             images.append(image)
             
-            // 更新 index 的指向
             index = images.count - 1
             
-            setNeedsCache()
+           // setNeedsCache()
         }
         
         func imageForUndo() -> UIImage? {
@@ -62,57 +47,11 @@ class Board: UIImageView {
                 if self.canUndo == false {
                     return nil
                 } else {
-                    setNeedsCache()
+                    //setNeedsCache()
                     return images[index]
                 }
             } else {
                 return nil
-            }
-        }
-        
-        func imageForRedo() -> UIImage? {
-            var image: UIImage? = nil
-            if self.canRedo {
-                image = images[++index]
-            }
-            setNeedsCache()
-            return image
-        }
-        
-        // MARK: - Cache
-        
-        private static let cahcesLength = 3 // 在内存中保存图片的张数，以 index 为中心点计算：cahcesLength * 2 + 1
-        private func setNeedsCache() {
-            if images.count >= DBUndoManager.cahcesLength {
-                let location = max(0, index - DBUndoManager.cahcesLength)
-                let length = min(images.count - 1, index + DBUndoManager.cahcesLength)
-                for i in location ... length {
-                    autoreleasepool {
-                        let image = images[i]
-                        
-                        if i > index - DBUndoManager.cahcesLength && i < index + DBUndoManager.cahcesLength {
-                            setRealImage(image, forIndex: i) // 如果在缓存区域中，则从文件加载
-                        } else {
-                            setFaultImage(image, forIndex: i) // 如果不在缓存区域中，则置成 Fault 对象
-                        }
-                    }
-                }
-            }
-        }
-        
-        private static var basePath: String = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first!
-        private func setFaultImage(image: UIImage, forIndex: Int) {
-            if !image.isKindOfClass(DBImageFault.self) {
-                let imagePath = (DBUndoManager.basePath as NSString).stringByAppendingPathComponent("\(forIndex)")
-                UIImagePNGRepresentation(image)!.writeToFile(imagePath, atomically: false)
-                images[forIndex] = DBImageFault()
-            }
-        }
-        
-        private func setRealImage(image: UIImage, forIndex: Int) {
-            if image.isKindOfClass(DBImageFault.self) {
-                let imagePath = (DBUndoManager.basePath as NSString).stringByAppendingPathComponent("\(forIndex)")
-                images[forIndex] = UIImage(data: NSData(contentsOfFile: imagePath)!)!
             }
         }
     }
@@ -131,14 +70,14 @@ class Board: UIImageView {
     
     override init(frame: CGRect) {
         self.strokeColor = UIColor.blackColor()
-        self.strokeWidth = 1
+        self.strokeWidth = 2
         
         super.init(frame: frame)
     }
     
     required init?(coder aDecoder: NSCoder) {
         self.strokeColor = UIColor.blackColor()
-        self.strokeWidth = 1
+        self.strokeWidth = 2
         
         super.init(coder: aDecoder)
     }
@@ -151,12 +90,6 @@ class Board: UIImageView {
         }
     }
     
-    var canRedo: Bool {
-        get {
-            return self.boardUndoManager.canRedo
-        }
-    }
-    
     // undo 和 redo 的逻辑都有所简化
     func undo() {
         if self.canUndo == false {
@@ -164,16 +97,6 @@ class Board: UIImageView {
         }
         
         self.image = self.boardUndoManager.imageForUndo()
-        
-        self.realImage = self.image
-    }
-    
-    func redo() {
-        if self.canRedo == false {
-            return
-        }
-        
-        self.image = self.boardUndoManager.imageForRedo()
         
         self.realImage = self.image
     }

@@ -18,7 +18,7 @@
 		0DA209421BFF8A90000FD39D /* PencilBrush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA209411BFF8A90000FD39D /* PencilBrush.swift */; };
 		0DA209441BFF8AE1000FD39D /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA209431BFF8AE1000FD39D /* Board.swift */; };
 		0DA209481C01455F000FD39D /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DA209471C01455F000FD39D /* images.xcassets */; };
-		0DAF49D81BFCF07600086F47 /* MemeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAF49D71BFCF07600086F47 /* MemeStruct.swift */; };
+		0DAF49D81BFCF07600086F47 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAF49D71BFCF07600086F47 /* Globals.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +56,7 @@
 		0DA209411BFF8A90000FD39D /* PencilBrush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilBrush.swift; sourceTree = "<group>"; };
 		0DA209431BFF8AE1000FD39D /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		0DA209471C01455F000FD39D /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
-		0DAF49D71BFCF07600086F47 /* MemeStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeStruct.swift; sourceTree = "<group>"; };
+		0DAF49D71BFCF07600086F47 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +115,7 @@
 				0D27AE5F1BFB8C6300C60BD7 /* LaunchScreen.storyboard */,
 				0D27AE621BFB8C6300C60BD7 /* Info.plist */,
 				0D27AEC01BFBED9A00C60BD7 /* TextField.swift */,
-				0DAF49D71BFCF07600086F47 /* MemeStruct.swift */,
+				0DAF49D71BFCF07600086F47 /* Globals.swift */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";
@@ -289,7 +289,7 @@
 			files = (
 				0D7FA6391C02C282004F7E34 /* ImagePickerDelegate.swift in Sources */,
 				0DA209421BFF8A90000FD39D /* PencilBrush.swift in Sources */,
-				0DAF49D81BFCF07600086F47 /* MemeStruct.swift in Sources */,
+				0DAF49D81BFCF07600086F47 /* Globals.swift in Sources */,
 				0DA209441BFF8AE1000FD39D /* Board.swift in Sources */,
 				0D27AEC11BFBED9A00C60BD7 /* TextField.swift in Sources */,
 				0D27AE591BFB8C6300C60BD7 /* ViewController.swift in Sources */,

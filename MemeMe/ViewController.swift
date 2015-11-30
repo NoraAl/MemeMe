@@ -8,8 +8,6 @@
 
 import UIKit
 
-var bottomTextFieldIsBeingEdited = false
-
 
 class ViewController: UIViewController{
     
@@ -20,9 +18,7 @@ class ViewController: UIViewController{
     @IBOutlet weak var topBar: UIToolbar!
     @IBOutlet weak var bottomBar: UIToolbar!
     @IBOutlet weak var undoButton: UIButton!
-    
     @IBOutlet var board: Board!
-    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var doneButton: UIButton!
     
@@ -32,12 +28,15 @@ class ViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bottomTextFieldIsBeingEdited = false
+        
         shareButton.enabled = false
+        
+        undoButton.shadow(undoButton)
+        doneButton.shadow(doneButton)
         
         drawingView(shown: false)
         
-        //imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        imageView.contentMode = UIViewContentMode.ScaleAspectFit
         
         bottomTextField.defaultTextAttributes = TextField().memeTextAttributes
         topTextField.defaultTextAttributes = TextField().memeTextAttributes
@@ -47,21 +46,6 @@ class ViewController: UIViewController{
         
         topTextField.text = "TOP"
         bottomTextField.text = "BOTTOM"
-    }
-    
-    func drawingView(shown shown: Bool){
-        if shown {
-            undoButton.enabled = true
-            undoButton.hidden = false
-            doneButton.enabled = true
-            doneButton.hidden = false
-            
-        } else {
-            undoButton.enabled = false
-            undoButton.hidden = true
-            doneButton.enabled = false
-            doneButton.hidden = true
-        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -75,12 +59,12 @@ class ViewController: UIViewController{
     }
     
     func keyboardWillShow(notification: NSNotification){
-        if bottomTextFieldIsBeingEdited {
+        if  bottomTextIsBeingEdited{
             view.frame.origin.y -= getKeyboardHeight(notification)}
     }
     
     func keyboardWillHide(notification: NSNotification){
-        if bottomTextFieldIsBeingEdited {
+        if bottomTextIsBeingEdited {
             view.frame.origin.y += getKeyboardHeight(notification)}
     }
     
@@ -139,12 +123,57 @@ class ViewController: UIViewController{
         UIView.commitAnimations()
     }
     
+    @IBAction func doneAcrion(sender: UIButton) {
+        drawingView(shown: false)
+        toggleBars(hide: false)
+        board.brush = nil
+    }
+    
+    @IBAction func undoAction(sender: UIButton) {
+        board.undo()
+    }
+    
+    @IBAction func draw(sender: UIBarButtonItem) {
+        toggleBars(hide: true)
+        delay(0.4){
+            self.drawingView(shown: true)
+        }
+        board.brush = PencilBrush()
+        
+        self.board.drawingStateChangedBlock = {(state: DrawingState) -> () in
+            if state != .Moved {
+                UIView.beginAnimations(nil, context: nil)
+                if state == .Began {
+                    self.undoButton.alpha = 0
+                } else if state == .Ended {
+                    UIView.setAnimationDelay(0.3)
+                    self.undoButton.alpha = 1
+                }
+                UIView.commitAnimations()
+            }
+        }
+    }
+    
+    func drawingView(shown shown: Bool){
+        if shown {
+            undoButton.enabled = true
+            undoButton.hidden = false
+            doneButton.enabled = true
+            doneButton.hidden = false
+        } else {
+            undoButton.enabled = false
+            undoButton.hidden = true
+            doneButton.enabled = false
+            doneButton.hidden = true
+        }
+    }
+    
     func generateMemedImage() -> UIImage {
         toggleBars(hide: true)
         drawingView(shown: false)
         var memedImage = UIImage()
         // Render view to an image
-        delay(0.9){
+        delay(0.7){
             UIGraphicsBeginImageContext(self.view.frame.size)
             self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
             memedImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -163,36 +192,5 @@ class ViewController: UIViewController{
             dispatch_get_main_queue(), closure)
     }
     
-    @IBAction func doneAcrion(sender: UIButton) {
-        drawingView(shown: false)
-        toggleBars(hide: false)
-        board.brush = nil
-        
-    }
-    @IBAction func undoAction(sender: UIButton) {
-        board.undo()
-    }
-    
-    @IBAction func draw(sender: UIBarButtonItem) {
-        toggleBars(hide: true)
-        delay(0.4){
-            self.drawingView(shown: true)
-        }
-        
-        board.brush = PencilBrush()
-        
-        self.board.drawingStateChangedBlock = {(state: DrawingState) -> () in
-            if state != .Moved {
-                UIView.beginAnimations(nil, context: nil)
-                if state == .Began {
-                    self.undoButton.alpha = 0
-                } else if state == .Ended {
-                    UIView.setAnimationDelay(1.0)
-                    self.undoButton.alpha = 1
-                }
-                UIView.commitAnimations()
-            }
-        }
-    }
 }
 

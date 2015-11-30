@@ -11,7 +11,6 @@ import UIKit
 
 protocol ImagePickerProtocol{
     func pickAnImage(fromLibrary fromLibrary: Bool, imageView: UIImageView, viewController:UIViewController, shareButton:UIBarButtonItem)
-    
 }
 
 class ImagePickerDelegate:  NSObject, ImagePickerProtocol, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
@@ -31,13 +30,12 @@ class ImagePickerDelegate:  NSObject, ImagePickerProtocol, UIImagePickerControll
             imagePickerViewController.sourceType = UIImagePickerControllerSourceType.Camera
         }
         viewController.presentViewController(imagePickerViewController, animated: true, completion: nil)
-
     }
     
     // UIImagePickerControllerDelegate mehtods
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]){
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.imageView.image = image
+            imageView.image = image
             shareButton.enabled = true
         }
         else { print("image cannot be selected properly") }

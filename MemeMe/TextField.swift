@@ -9,17 +9,9 @@
 import Foundation
 import UIKit
 
-extension NSParagraphStyle {
-    func centerParagraphStyle() -> NSParagraphStyle {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .Center
-        return paragraphStyle.copy() as! NSParagraphStyle
-    }
-}
 
 class TextField: NSObject, UITextFieldDelegate {
     var bottomTextFieldIsBeingEdited = false
-    
     let memeTextAttributes = [
         NSForegroundColorAttributeName : UIColor.whiteColor(),
         NSStrokeColorAttributeName : UIColor.blackColor(),
@@ -31,15 +23,14 @@ class TextField: NSObject, UITextFieldDelegate {
     func textFieldDidBeginEditing(textField: UITextField) {
         
         if (textField.restorationIdentifier == "bottomTextField"){
-            bottomTextFieldIsBeingEdited = true
+            bottomTextIsBeingEdited = true
             if (textField.text == "BOTTOM"){
                 textField.text = ""
             } else {
                 textField.text = textField.text!
             }
         } else {
-            print("top")
-            bottomTextFieldIsBeingEdited = false
+            bottomTextIsBeingEdited = false
             if (textField.text == "TOP"){
                 textField.text = ""
             } else {

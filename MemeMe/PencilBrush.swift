@@ -17,7 +17,6 @@ class PencilBrush {
     
     func drawInContext(context: CGContextRef) {
         if let lastPoint = self.lastPoint {
-            print(lastPoint)
             CGContextMoveToPoint(context, lastPoint.x, lastPoint.y)
             CGContextAddLineToPoint(context, endPoint.x, endPoint.y)
         } else {
