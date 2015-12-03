@@ -1,5 +1,5 @@
 //
-//  ImagePickerDelegate.swift
+//  ImagePicker.swift
 //  MemeMe
 //
 //  Created by Nora on 11/22/15.
@@ -10,16 +10,18 @@
 import UIKit
 
 protocol ImagePickerProtocol{
-    func pickAnImage(fromLibrary fromLibrary: Bool, imageView: UIImageView, viewController:UIViewController, shareButton:UIBarButtonItem)
+    func pickAnImage(fromLibrary fromLibrary: Bool, imageView: UIImageView, viewController:UIViewController, shareButton:UIBarButtonItem, drawButton: UIBarButtonItem)
 }
 
-class ImagePickerDelegate:  NSObject, ImagePickerProtocol, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class ImagePicker:  NSObject, ImagePickerProtocol, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     var imageView = UIImageView()
     var shareButton = UIBarButtonItem()
+    var drawButton = UIBarButtonItem()
     
-    func pickAnImage(fromLibrary fromLibrary: Bool, imageView: UIImageView, viewController :UIViewController, shareButton:UIBarButtonItem){
+    func pickAnImage(fromLibrary fromLibrary: Bool, imageView: UIImageView, viewController :UIViewController, shareButton:UIBarButtonItem, drawButton: UIBarButtonItem){
         self.imageView = imageView
         self.shareButton = shareButton
+        self.drawButton = drawButton
         
         let imagePickerViewController = UIImagePickerController()
         imagePickerViewController.delegate = self
@@ -37,6 +39,7 @@ class ImagePickerDelegate:  NSObject, ImagePickerProtocol, UIImagePickerControll
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.image = image
             shareButton.enabled = true
+            drawButton.enabled = true
         }
         else { print("image cannot be selected properly") }
         picker.dismissViewControllerAnimated(true, completion: nil)

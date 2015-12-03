@@ -8,22 +8,20 @@
 
 import UIKit
 
-var bottomTextIsBeingEdited : Bool = false
+var bottomTextIsBeingEdited = false
 var moveViewUp:Bool {
 set {
-    bottomTextIsBeingEdited = newValue
-}
+    bottomTextIsBeingEdited = newValue }
 get {
-    return bottomTextIsBeingEdited
-}
+    return bottomTextIsBeingEdited }
 }
 
 extension UIButton{
-    func shadow(button:UIButton){
-        button.layer.shadowRadius  = 0.65
-        button.layer.shadowOffset = CGSize(width: 3, height: 0)
-        button.layer.shadowOpacity = 0.85
-        button.layer.shadowColor = UIColor.whiteColor().CGColor
+    func shadow(){
+        self.layer.shadowRadius  = 0.65
+        self.layer.shadowOffset = CGSize(width: 3, height: 0)
+        self.layer.shadowOpacity = 0.85
+        self.layer.shadowColor = UIColor.whiteColor().CGColor
     }
 }
 

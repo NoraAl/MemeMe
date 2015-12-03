@@ -12,6 +12,7 @@ import UIKit
 
 class TextField: NSObject, UITextFieldDelegate {
     var bottomTextFieldIsBeingEdited = false
+    
     let memeTextAttributes = [
         NSForegroundColorAttributeName : UIColor.whiteColor(),
         NSStrokeColorAttributeName : UIColor.blackColor(),
@@ -42,7 +43,7 @@ class TextField: NSObject, UITextFieldDelegate {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         var newText = textField.text! as NSString
         newText = newText.stringByReplacingCharactersInRange(range, withString: string)
-
+        
         if(textField.textInputView.bounds.width > textField.bounds.width && string != ""){//to stop if exceeds the textfield's boundaries
             return false
         }
