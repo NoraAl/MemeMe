@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Meme Editor View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MemeEditorViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -60,10 +60,10 @@
                                         <exclude reference="sxP-dC-cVS"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="KO3-K4-Dl0"/>
-                                        <exclude reference="gub-zz-lb5"/>
                                         <exclude reference="JTJ-Fl-Pce"/>
                                         <exclude reference="Nx9-Ti-WXg"/>
+                                        <exclude reference="KO3-K4-Dl0"/>
+                                        <exclude reference="gub-zz-lb5"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -72,10 +72,10 @@
                                         <include reference="sxP-dC-cVS"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <include reference="KO3-K4-Dl0"/>
-                                        <include reference="gub-zz-lb5"/>
                                         <include reference="JTJ-Fl-Pce"/>
                                         <include reference="Nx9-Ti-WXg"/>
+                                        <include reference="KO3-K4-Dl0"/>
+                                        <include reference="gub-zz-lb5"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -190,26 +190,26 @@
                                 <exclude reference="Jxj-Nv-YdM"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Xct-6c-taC"/>
-                                <exclude reference="cNG-yu-2bm"/>
-                                <exclude reference="n06-Sr-clz"/>
-                                <exclude reference="4Aj-hJ-YlC"/>
-                                <exclude reference="INN-lk-pOb"/>
-                                <exclude reference="Qpa-N1-Cp3"/>
-                                <exclude reference="R8T-9H-rRf"/>
-                                <exclude reference="GZV-1l-11j"/>
-                                <exclude reference="sRv-uu-aC9"/>
+                                <exclude reference="bx0-uo-GK9"/>
+                                <exclude reference="opr-se-LhM"/>
                                 <exclude reference="Ddg-lK-Zbo"/>
                                 <exclude reference="gIO-Gt-sUj"/>
                                 <exclude reference="mYE-Qp-ZM6"/>
                                 <exclude reference="vQe-qt-yOj"/>
                                 <exclude reference="x8W-kg-TcO"/>
-                                <exclude reference="bx0-uo-GK9"/>
-                                <exclude reference="opr-se-LhM"/>
                                 <exclude reference="GN0-T5-FoP"/>
                                 <exclude reference="Kyg-dj-ACg"/>
                                 <exclude reference="l6N-sU-4Z7"/>
                                 <exclude reference="n4z-Uo-Hjp"/>
+                                <exclude reference="4Aj-hJ-YlC"/>
+                                <exclude reference="INN-lk-pOb"/>
+                                <exclude reference="Qpa-N1-Cp3"/>
+                                <exclude reference="R8T-9H-rRf"/>
+                                <exclude reference="Xct-6c-taC"/>
+                                <exclude reference="cNG-yu-2bm"/>
+                                <exclude reference="n06-Sr-clz"/>
+                                <exclude reference="GZV-1l-11j"/>
+                                <exclude reference="sRv-uu-aC9"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -222,26 +222,26 @@
                                 <include reference="Jxj-Nv-YdM"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Xct-6c-taC"/>
-                                <include reference="cNG-yu-2bm"/>
-                                <include reference="n06-Sr-clz"/>
-                                <include reference="4Aj-hJ-YlC"/>
-                                <include reference="INN-lk-pOb"/>
-                                <include reference="Qpa-N1-Cp3"/>
-                                <include reference="R8T-9H-rRf"/>
-                                <include reference="GZV-1l-11j"/>
-                                <include reference="sRv-uu-aC9"/>
+                                <include reference="bx0-uo-GK9"/>
+                                <include reference="opr-se-LhM"/>
                                 <include reference="Ddg-lK-Zbo"/>
                                 <include reference="gIO-Gt-sUj"/>
                                 <include reference="mYE-Qp-ZM6"/>
                                 <include reference="vQe-qt-yOj"/>
                                 <include reference="x8W-kg-TcO"/>
-                                <include reference="bx0-uo-GK9"/>
-                                <include reference="opr-se-LhM"/>
                                 <include reference="GN0-T5-FoP"/>
                                 <include reference="Kyg-dj-ACg"/>
                                 <include reference="l6N-sU-4Z7"/>
                                 <include reference="n4z-Uo-Hjp"/>
+                                <include reference="4Aj-hJ-YlC"/>
+                                <include reference="INN-lk-pOb"/>
+                                <include reference="Qpa-N1-Cp3"/>
+                                <include reference="R8T-9H-rRf"/>
+                                <include reference="Xct-6c-taC"/>
+                                <include reference="cNG-yu-2bm"/>
+                                <include reference="n06-Sr-clz"/>
+                                <include reference="GZV-1l-11j"/>
+                                <include reference="sRv-uu-aC9"/>
                             </mask>
                         </variation>
                     </view>

@@ -9,7 +9,7 @@
 import UIKit
 
 
-class ViewController: UIViewController{
+class MemeEditorViewController: UIViewController{
     
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
@@ -40,7 +40,7 @@ class ViewController: UIViewController{
         
         show(.boardView(false))
         
-        imageView.contentMode = UIViewContentMode.ScaleAspectFill
+        imageView.contentMode = UIViewContentMode.ScaleAspectFit
         
         topTextField.delegate = textFieldDelegate
         bottomTextField.delegate = textFieldDelegate
