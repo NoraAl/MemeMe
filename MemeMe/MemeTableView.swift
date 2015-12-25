@@ -17,7 +17,6 @@ class MemeTableViewController: UITableViewController
         navigationItem.leftBarButtonItem = editButtonItem()
         
         allMemes = loadMemess()!
-        
     }
     
     // MARK: - Table view data source
@@ -50,15 +49,28 @@ class MemeTableViewController: UITableViewController
         }
     }
 
+    // MARK: - Navigation
     
-    @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showMemeDetail" {
+            let memeDetailViewController = segue.destinationViewController as! MemeDetail
+            
+            if let selectedMemeCell = sender as? MemeTableCell {
+                let indexPath = tableView.indexPathForCell(selectedMemeCell)!
+                let selectedMeme = allMemes[indexPath.row]
+                memeDetailViewController.memedImage = selectedMeme.memedImage
+            }
+        }
+    }
+    
+    @IBAction func unwindToMemeList(sender: UIStoryboardSegue) {
         print("unwind")
         if let sourceViewController = sender.sourceViewController as? MemeEditorViewController, meme = sourceViewController.newMeme {
             let newIndexPath = NSIndexPath(forRow: allMemes.count, inSection: 0)
             allMemes.append(meme)
             tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
             
-            // Save the meals.
+            // Save the memes.
             saveAllMemes()
         }
     }

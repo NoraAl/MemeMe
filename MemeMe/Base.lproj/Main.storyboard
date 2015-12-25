@@ -163,6 +163,7 @@
                                     <outlet property="cellDateText" destination="gsZ-49-zIP" id="ikP-fy-XKy"/>
                                     <outlet property="cellImageView" destination="U9O-XK-CSg" id="hwR-qn-qet"/>
                                     <outlet property="cellTopText" destination="Jfg-Ql-jq6" id="jk6-WS-xBq"/>
+                                    <segue destination="2Oi-P0-tcL" kind="show" identifier="showMemeDetail" id="Fe4-6a-jUN"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -426,13 +427,66 @@
                         <outlet property="topBar" destination="Jxj-Nv-YdM" id="uMw-Vo-yXW"/>
                         <outlet property="topTextField" destination="edA-Ub-bHW" id="QyD-lE-2YR"/>
                         <outlet property="undoButton" destination="vd0-xo-iWK" id="eJF-ZR-bdo"/>
-                        <segue destination="67P-Tl-oZc" kind="unwind" identifier="dismissMemeEditor" unwindAction="unwindToMealList:" id="S1l-zq-OcG"/>
+                        <segue destination="67P-Tl-oZc" kind="unwind" identifier="dismissMemeEditor" unwindAction="unwindToMemeList:" id="S1l-zq-OcG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="67P-Tl-oZc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="304.5" y="368"/>
+        </scene>
+        <!--Meme Detail-->
+        <scene sceneID="Upp-Hs-Mfo">
+            <objects>
+                <viewController id="2Oi-P0-tcL" customClass="MemeDetail" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dz5-Vy-LsO"/>
+                        <viewControllerLayoutGuide type="bottom" id="nNI-u9-nRZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="swW-jh-mP7">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aYY-nD-vHv">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="aYY-nD-vHv" firstAttribute="leading" secondItem="swW-jh-mP7" secondAttribute="leading" id="R4n-9M-Qyq"/>
+                            <constraint firstItem="aYY-nD-vHv" firstAttribute="top" secondItem="dz5-Vy-LsO" secondAttribute="bottom" id="UhQ-Uy-Et4"/>
+                            <constraint firstAttribute="trailing" secondItem="aYY-nD-vHv" secondAttribute="trailing" id="qU0-DM-jtj"/>
+                            <constraint firstItem="aYY-nD-vHv" firstAttribute="bottom" secondItem="nNI-u9-nRZ" secondAttribute="top" id="zaK-EN-h50"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="aYY-nD-vHv"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="R4n-9M-Qyq"/>
+                                <exclude reference="UhQ-Uy-Et4"/>
+                                <exclude reference="qU0-DM-jtj"/>
+                                <exclude reference="zaK-EN-h50"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="aYY-nD-vHv"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="R4n-9M-Qyq"/>
+                                <include reference="UhQ-Uy-Et4"/>
+                                <include reference="qU0-DM-jtj"/>
+                                <include reference="zaK-EN-h50"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="detailViewImage" destination="aYY-nD-vHv" id="DTW-1R-yzT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XmJ-2f-QYT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-630" y="1167"/>
         </scene>
     </scenes>
     <resources>
