@@ -31,7 +31,6 @@ class MemeTableViewController: UITableViewController
         
         let memeObject = allMemes[indexPath.row]
         
-        // Set the name and image
         cell.cellTopText.text = memeObject.top
         cell.cellBottomText.text = memeObject.bottom
         cell.imageView?.image = memeObject.memedImage
@@ -39,11 +38,19 @@ class MemeTableViewController: UITableViewController
         return cell
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
-        
-    {
+    // MARK: Deleting Memes
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool{
         return true
     }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            allMemes.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
+    }
+
+    
     @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
         print("unwind")
         if let sourceViewController = sender.sourceViewController as? MemeEditorViewController, meme = sourceViewController.newMeme {
@@ -52,7 +59,7 @@ class MemeTableViewController: UITableViewController
             tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
             
             // Save the meals.
-            saveMemess()
+            saveAllMemes()
         }
     }
 }

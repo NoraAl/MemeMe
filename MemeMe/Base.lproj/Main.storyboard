@@ -172,6 +172,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="fcE-hc-Apn">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="6AI-b9-uPF"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="hNo-sB-h3b">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="presentation" id="DIT-VU-OEL"/>

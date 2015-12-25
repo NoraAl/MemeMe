@@ -55,7 +55,7 @@ class Memes: NSObject, NSCoding {
 var allMemes = [Memes]()
 
 // MARK: global save and load methods
-func saveMemess() {
+func saveAllMemes() {
     let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(allMemes, toFile: Memes.ArchiveURL.path!)
     if !isSuccessfulSave {
         print("Failed to save allMemes...")
