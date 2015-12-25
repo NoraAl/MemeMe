@@ -27,6 +27,8 @@ class MemeEditorViewController: UIViewController{
     let textFieldDelegate = TextField()
     var memedImage: UIImage?
     
+    var newMeme: Memes?
+    
     enum Views{
         case mainView(Bool)
         case boardView(Bool)
@@ -106,7 +108,8 @@ class MemeEditorViewController: UIViewController{
         shareViewController.completionWithItemsHandler = { (_:String?, completed:Bool, _:[AnyObject]?, error:NSError?)->Void in
             if completed {
                 self.save()
-                shareViewController.dismissViewControllerAnimated(true, completion: nil )
+                self.performSegueWithIdentifier("dismissMemeEditor", sender: self)
+                //shareViewController.dismissViewControllerAnimated(true, completion: nil )
             }
             if let error = error {
                 print("\(error)")
@@ -184,7 +187,10 @@ class MemeEditorViewController: UIViewController{
     }
     
     func save(){
-        Meme(top: topTextField.text!, bottom: bottomTextField.text!, image: imageView.image!,board: board.takeImage(), memedImage: memedImage!)
+        
+        newMeme = Memes(top: self.topTextField.text!, bottom: self.bottomTextField.text!, memedImage: self.memedImage!)
+        
+        //Meme(top: topTextField.text!, bottom: bottomTextField.text!, image: imageView.image!,board: board.takeImage(), memedImage: memedImage!)
     }
     
 }
