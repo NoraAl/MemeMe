@@ -35,10 +35,11 @@ extension NSParagraphStyle {
 
 struct Meme{
     var bottom, top: String
-    var image, board, memedImage: UIImage
+    var image, memedImage: UIImage
+    var board: Board
     
     init (top:String, bottom: String, image:
-        UIImage,board: UIImage, memedImage: UIImage){
+        UIImage,board: Board, memedImage: UIImage){
             self.top = top
             self.bottom = bottom
             self.image = image

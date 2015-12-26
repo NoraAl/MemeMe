@@ -13,10 +13,12 @@ class MemeDetail: UIViewController{
     
     @IBOutlet weak var detailViewImage: UIImageView!
     var memedImage: UIImage!
+    var memeDetail: Memes!
     
     override func viewDidLoad() {
-        if let memedImage = self.memedImage {
-            detailViewImage.image = memedImage
+        
+        if let memeDetail = self.memeDetail {
+            detailViewImage.image = memeDetail.memedImage
         } else {
             print("Why did I allow sharing?!")
         }

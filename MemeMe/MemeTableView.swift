@@ -16,6 +16,7 @@ class MemeTableViewController: UITableViewController
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem()
         
+        
         allMemes = loadMemess()!
     }
     
@@ -58,13 +59,12 @@ class MemeTableViewController: UITableViewController
             if let selectedMemeCell = sender as? MemeTableCell {
                 let indexPath = tableView.indexPathForCell(selectedMemeCell)!
                 let selectedMeme = allMemes[indexPath.row]
-                memeDetailViewController.memedImage = selectedMeme.memedImage
+                memeDetailViewController.memeDetail = selectedMeme
             }
         }
     }
     
     @IBAction func unwindToMemeList(sender: UIStoryboardSegue) {
-        print("unwind")
         if let sourceViewController = sender.sourceViewController as? MemeEditorViewController, meme = sourceViewController.newMeme {
             let newIndexPath = NSIndexPath(forRow: allMemes.count, inSection: 0)
             allMemes.append(meme)

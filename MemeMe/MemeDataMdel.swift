@@ -12,9 +12,10 @@ import Foundation
 import UIKit
 
 class Memes: NSObject, NSCoding {
-    var top: String
-    var bottom: String
-    var memedImage: UIImage
+    
+    var bottom, top: String
+    var originalImage, memedImage: UIImage
+    var board: Board
     
     // MARK: Archiving Paths
     static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
@@ -23,14 +24,18 @@ class Memes: NSObject, NSCoding {
     struct PropertyKey {
         static let topKey = "top"
         static let bottomKey = "bottom"
+        static let originalImage = "originalImage"
         static let memedImageKey = "memedImage"
+        static let boardKey = "boardKey"
     }
     
-    init?(top: String, bottom: String, memedImage: UIImage) {
+    init?(top: String, bottom: String, originalImage: UIImage, board: Board, memedImage: UIImage) {
         // Initialize stored properties.
         self.top = top
         self.bottom = bottom
         self.memedImage = memedImage
+        self.originalImage = originalImage
+        self.board = board
         
         super.init()
 }
@@ -38,16 +43,22 @@ class Memes: NSObject, NSCoding {
     // MARK: NSCoding
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(top, forKey: PropertyKey.topKey)
-        aCoder.encodeObject(memedImage, forKey: PropertyKey.memedImageKey)
         aCoder.encodeObject(bottom, forKey: PropertyKey.bottomKey)
+        aCoder.encodeObject(originalImage, forKey:  PropertyKey.originalImage)
+        aCoder.encodeObject(board, forKey: PropertyKey.boardKey)
+        aCoder.encodeObject(memedImage, forKey: PropertyKey.memedImageKey)
+        
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
         let top = aDecoder.decodeObjectForKey(PropertyKey.topKey) as! String
         let bottom = aDecoder.decodeObjectForKey(PropertyKey.bottomKey) as! String
+        let originalImage = aDecoder.decodeObjectForKey(PropertyKey.originalImage) as! UIImage
+        let board = aDecoder.decodeObjectForKey(PropertyKey.boardKey) as! Board
         let memedImage = aDecoder.decodeObjectForKey(PropertyKey.memedImageKey) as! UIImage
         
-        self.init(top: top, bottom: bottom, memedImage: memedImage)
+        
+        self.init(top: top, bottom: bottom, originalImage: originalImage, board: board, memedImage: memedImage)
     }
     
 }
@@ -63,6 +74,11 @@ func saveAllMemes() {
 }
 
 func loadMemess() -> [Memes]? {
+    /* //reset persistent Data"
+    allMemes.removeAll()
+    NSKeyedArchiver.archiveRootObject(allMemes, toFile: Memes.ArchiveURL.path!)
+    */
+    
     return NSKeyedUnarchiver.unarchiveObjectWithFile(Memes.ArchiveURL.path!) as? [Memes]
 }
 
