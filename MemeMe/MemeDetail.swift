@@ -24,4 +24,13 @@ class MemeDetail: UIViewController{
         }
         super.viewDidLoad()
     }
+
+    @IBAction func editCurrentMeme(sender: UIBarButtonItem) {
+        
+        var memeEditorController: MemeEditorViewController
+        let storyboard = UIStoryboard (name: "Main", bundle: nil)
+        memeEditorController = storyboard.instantiateViewControllerWithIdentifier("MemeEditorController") as! MemeEditorViewController
+        memeEditorController.newMeme = memeDetail
+        presentViewController(memeEditorController, animated: true, completion: nil)
+    }
 }

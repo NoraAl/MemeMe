@@ -37,11 +37,6 @@ class MemeEditorViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        shareButton.enabled = false
-        drawButton.enabled = false
-        
-        show(.boardView(false))
-        
         imageView.contentMode = UIViewContentMode.ScaleAspectFit
         
         topTextField.delegate = textFieldDelegate
@@ -53,13 +48,36 @@ class MemeEditorViewController: UIViewController{
         bottomTextField.defaultTextAttributes = TextField().memeTextAttributes
         topTextField.defaultTextAttributes = TextField().memeTextAttributes
         
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
+        show(.boardView(false))
+        
+        if let newMeme = self.newMeme {
+            
+            reconstructExistingMeme(newMeme)
+        } else {
+            shareButton.enabled = false
+            drawButton.enabled = false
+            
+            topTextField.text = "TOP"
+            bottomTextField.text = "BOTTOM"
+        }
+    }
+    
+    func reconstructExistingMeme(existingMeme: Memes){
+        topTextField.text = existingMeme.top
+        bottomTextField.text = existingMeme.bottom
+        imageView.image = existingMeme.originalImage
+        board = existingMeme.board
+        
+        view.bringSubviewToFront(board)
+        
+        shareButton.enabled = true
+        drawButton.enabled = true
     }
     
     override func viewWillAppear(animated: Bool) {
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         subscribeToKeyboardNotifications()
+
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -78,6 +96,7 @@ class MemeEditorViewController: UIViewController{
     }
     
     func subscribeToKeyboardNotifications() {
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }

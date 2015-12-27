@@ -39,6 +39,7 @@ class MemeTableViewController: UITableViewController
     }
     
     // MARK: Deleting Memes
+    
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool{
         return true
     }

@@ -16,7 +16,40 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="J45-h2-TNa">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="J45-h2-TNa" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Ilx-o6-iyW"/>
+                            <constraint firstItem="J45-h2-TNa" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="S7M-yP-Z0w"/>
+                            <constraint firstItem="J45-h2-TNa" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" id="Sqj-hB-S27"/>
+                            <constraint firstAttribute="trailing" secondItem="J45-h2-TNa" secondAttribute="trailing" id="X3T-y0-frN"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="J45-h2-TNa"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Ilx-o6-iyW"/>
+                                <exclude reference="S7M-yP-Z0w"/>
+                                <exclude reference="Sqj-hB-S27"/>
+                                <exclude reference="X3T-y0-frN"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="J45-h2-TNa"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Ilx-o6-iyW"/>
+                                <include reference="S7M-yP-Z0w"/>
+                                <include reference="Sqj-hB-S27"/>
+                                <include reference="X3T-y0-frN"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -24,4 +57,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="launch" width="768" height="1024"/>
+    </resources>
 </document>
