@@ -68,7 +68,6 @@ class MemeTableViewController: UITableViewController
             allMemes.append(meme)
             tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
             
-            // Save the memes.
             saveAllMemes()
         }
     }

@@ -128,7 +128,9 @@ class MemeEditorViewController: UIViewController{
             if completed {
                 self.save()
                 self.performSegueWithIdentifier("dismissMemeEditor", sender: self)
-                //shareViewController.dismissViewControllerAnimated(true, completion: nil )
+            } else {
+                self.newMeme = nil// if comes from existing meme, don't add it
+                self.performSegueWithIdentifier("dismissMemeEditor", sender: self)
             }
             if let error = error {
                 print("\(error)")
@@ -171,18 +173,16 @@ class MemeEditorViewController: UIViewController{
     }
     
     func generateMemedImage() -> UIImage {
-        show(.mainView(false))
-        show(.boardView(false))
-        
         var memedImage = UIImage()
+        let virtualView = self.virtualView()
         
-        // Render view to an image
-        UIGraphicsBeginImageContextWithOptions(view.frame.size, false, 0)
-        view.drawViewHierarchyInRect(view.frame, afterScreenUpdates: true)
+        UIGraphicsBeginImageContextWithOptions(virtualView.frame.size, false, 0)
+        
+        virtualView.drawViewHierarchyInRect(virtualView.frame, afterScreenUpdates: true)
         memedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
         
-        show(.mainView(true))
+        UIGraphicsEndImageContext()
+
         return memedImage
     }
     
@@ -209,5 +209,36 @@ class MemeEditorViewController: UIViewController{
         newMeme = Memes(top: self.topTextField.text!, bottom: self.bottomTextField.text!, originalImage: imageView.image!, board: self.board, memedImage: memedImage!)
     }
     
+}
+
+extension MemeEditorViewController
+{
+    func virtualView() -> UIView{
+        
+        let virtualView = UIView(frame: self.view.frame)
+        virtualView.backgroundColor = self.view.backgroundColor
+        
+        let virtualImageView = UIImageView(frame: self.imageView.frame)
+        virtualImageView.contentMode = .ScaleAspectFit
+        virtualImageView.image = self.imageView.image
+        
+        let virtualTop = UITextField(frame: self.topTextField.frame)
+        virtualTop.defaultTextAttributes = self.topTextField.defaultTextAttributes
+        virtualTop.text = self.topTextField.text
+        
+        let virtualBottom = UITextField(frame: self.bottomTextField.frame)
+        virtualBottom.defaultTextAttributes = self.bottomTextField.defaultTextAttributes
+        virtualBottom.text = self.bottomTextField.text
+        
+        let virtualBoard = UIImageView(image: self.board.image)
+        
+        virtualView.addSubview(virtualImageView)
+        virtualView.addSubview(virtualBoard)
+        virtualView.addSubview(virtualTop)
+        virtualView.addSubview(virtualBottom)
+        
+        return virtualView
+    }
+
 }
 
