@@ -12,7 +12,6 @@ import Foundation
 import UIKit
 
 class Memes: NSObject, NSCoding {
-    
     var bottom, top: String
     var originalImage, memedImage: UIImage
     var board: Board
@@ -57,28 +56,7 @@ class Memes: NSObject, NSCoding {
         let board = aDecoder.decodeObjectForKey(PropertyKey.boardKey) as! Board
         let memedImage = aDecoder.decodeObjectForKey(PropertyKey.memedImageKey) as! UIImage
         
-        
         self.init(top: top, bottom: bottom, originalImage: originalImage, board: board, memedImage: memedImage)
     }
     
 }
-// MARK: global array that holds all sent or saved memes
-var allMemes = [Memes]()
-
-// MARK: global save and load methods
-func saveAllMemes() {
-    let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(allMemes, toFile: Memes.ArchiveURL.path!)
-    if !isSuccessfulSave {
-        print("Failed to save allMemes...")
-    }
-}
-
-func loadMemess() -> [Memes]? {
-    /* //reset persistent Data"
-    allMemes.removeAll()
-    NSKeyedArchiver.archiveRootObject(allMemes, toFile: Memes.ArchiveURL.path!)
-    */
-    
-    return NSKeyedUnarchiver.unarchiveObjectWithFile(Memes.ArchiveURL.path!) as? [Memes]
-}
-

@@ -206,10 +206,7 @@ class MemeEditorViewController: UIViewController{
     }
     
     func save(){
-        
         newMeme = Memes(top: self.topTextField.text!, bottom: self.bottomTextField.text!, originalImage: imageView.image!, board: self.board, memedImage: memedImage!)
-        
-        //Meme(top: topTextField.text!, bottom: bottomTextField.text!, image: imageView.image!,board: board.takeImage(), memedImage: memedImage!)
     }
     
 }

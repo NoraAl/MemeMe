@@ -10,14 +10,17 @@ import UIKit
 
 class MemeTableViewController: UITableViewController
 {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem()
         
-        
-        allMemes = loadMemess()!
+        if let loadedMemes = loadMemess(){
+            allMemes = loadedMemes
+        } else {
+            //if no memes return empty array
+            allMemes = [Memes]()
+        }
     }
     
     // MARK: - Table view data source
@@ -39,7 +42,6 @@ class MemeTableViewController: UITableViewController
     }
     
     // MARK: Deleting Memes
-    
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool{
         return true
     }
@@ -52,17 +54,12 @@ class MemeTableViewController: UITableViewController
     }
 
     // MARK: - Navigation
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showMemeDetail" {
-            let memeDetailViewController = segue.destinationViewController as! MemeDetail
-            
-            if let selectedMemeCell = sender as? MemeTableCell {
-                let indexPath = tableView.indexPathForCell(selectedMemeCell)!
-                let selectedMeme = allMemes[indexPath.row]
-                memeDetailViewController.memeDetail = selectedMeme
-            }
-        }
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let memeDetailViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetail") as! MemeDetail
+        memeDetailViewController.memeDetail = allMemes[indexPath.row]
+        
+        navigationController!.pushViewController(memeDetailViewController, animated: true)
+
     }
     
     @IBAction func unwindToMemeList(sender: UIStoryboardSegue) {

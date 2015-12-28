@@ -9,21 +9,25 @@
 import UIKit
 
 class MemeTableCell: UITableViewCell {
-//@IBOutlet weak var cellT: UILabel!
     @IBOutlet weak var cellTopText: UILabel!
     @IBOutlet weak var cellBottomText: UILabel!
     @IBOutlet weak var cellDateText: UILabel!
     @IBOutlet weak var cellImageView: UIImageView!
-
+    let highlightedColor = UIColor(red:0.882, green:0.918, blue:0.937, alpha:1)
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        backgroundColor = myBackgroundColor
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+        //super.setSelected(selected, animated: animated)
+        backgroundColor = selected ? highlightedColor : myBackgroundColor
 
-        // Configure the view for the selected state
+    }
+    
+    override func setHighlighted(highlighted: Bool, animated: Bool){
+        backgroundColor =  highlighted ? highlightedColor : myBackgroundColor
     }
 
 }

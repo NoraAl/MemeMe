@@ -8,12 +8,12 @@
 
 import UIKit
 
+let myBackgroundColor = UIColor(red: 0.753, green:0.839, blue:0.894, alpha:1)
+
 var bottomTextIsBeingEdited = false
 var moveViewUp:Bool {
-set {
-    bottomTextIsBeingEdited = newValue }
-get {
-    return bottomTextIsBeingEdited }
+set { bottomTextIsBeingEdited = newValue }
+get { return bottomTextIsBeingEdited }
 }
 
 extension UIButton{
@@ -33,17 +33,23 @@ extension NSParagraphStyle {
     }
 }
 
-struct Meme{
-    var bottom, top: String
-    var image, memedImage: UIImage
-    var board: Board
-    
-    init (top:String, bottom: String, image:
-        UIImage,board: Board, memedImage: UIImage){
-            self.top = top
-            self.bottom = bottom
-            self.image = image
-            self.board = board
-            self.memedImage = memedImage
+
+// MARK: global array that holds all sent or saved memes
+var allMemes = [Memes]()
+
+// MARK: global save and load methods
+func saveAllMemes() {
+    let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(allMemes, toFile: Memes.ArchiveURL.path!)
+    if !isSuccessfulSave {
+        print("Failed to save allMemes...")
     }
 }
+
+func loadMemess() -> [Memes]? {
+    /* //reset persistent Data"
+    allMemes.removeAll()
+    NSKeyedArchiver.archiveRootObject(allMemes, toFile: Memes.ArchiveURL.path!)
+    */
+    return NSKeyedUnarchiver.unarchiveObjectWithFile(Memes.ArchiveURL.path!) as? [Memes]
+}
+
