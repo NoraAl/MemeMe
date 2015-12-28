@@ -66,7 +66,7 @@ class MemeEditorViewController: UIViewController{
         topTextField.text = existingMeme.top
         bottomTextField.text = existingMeme.bottom
         imageView.image = existingMeme.originalImage
-        board = existingMeme.board
+        board.image = existingMeme.board.image
         
         view.bringSubviewToFront(board)
         
@@ -153,8 +153,6 @@ class MemeEditorViewController: UIViewController{
         show(.boardView(true))
         
         view.bringSubviewToFront(board)
-        view.bringSubviewToFront(topBar)
-        view.bringSubviewToFront(bottomBar)
         
         board.brush = PencilBrush()
         
