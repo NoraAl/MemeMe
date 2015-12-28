@@ -23,6 +23,11 @@ class MemeTableViewController: UITableViewController
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        
+       //self.tableView.reloadData()
+    }
+    
     // MARK: - Table view data source
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allMemes.count
@@ -33,11 +38,10 @@ class MemeTableViewController: UITableViewController
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MemeTableCell
         
         let memeObject = allMemes[indexPath.row]
-        
         cell.cellTopText.text = memeObject.top
         cell.cellBottomText.text = memeObject.bottom
         cell.imageView?.image = memeObject.memedImage
-        
+
         return cell
     }
     

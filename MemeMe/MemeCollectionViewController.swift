@@ -11,10 +11,13 @@ import UIKit
 
 class MemeCollectionViewController: UICollectionViewController {
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
-    
+   
+    override func viewWillAppear(animated: Bool) {
+        self.collectionView!.reloadData()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        //navigationItem.leftBarButtonItem = editButtonItem()
+        navigationItem.leftBarButtonItem = editButtonItem()
         
         collectionView!.backgroundColor = myBackgroundColor
         
@@ -29,6 +32,7 @@ class MemeCollectionViewController: UICollectionViewController {
         flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSizeMake(cellWidth, cellHeight)
     }
+    
     
     // MARK: Collection View Data Source
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -55,6 +59,11 @@ class MemeCollectionViewController: UICollectionViewController {
         
         navigationController!.pushViewController(memeDetailViewController, animated: true)
         
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "collectionToMemeEditor"{
+            self.dismissViewControllerAnimated(false, completion: nil)
+        }
     }
     
 }
