@@ -12,7 +12,7 @@ import Foundation
 import UIKit
 
 class Memes: NSObject, NSCoding {
-    var bottom, top: String
+    var bottom, top, time: String
     var originalImage, memedImage: UIImage
     var board: Board
     
@@ -26,15 +26,17 @@ class Memes: NSObject, NSCoding {
         static let originalImage = "originalImage"
         static let memedImageKey = "memedImage"
         static let boardKey = "boardKey"
+        static let timeKey = "timeKey"
     }
     
-    init?(top: String, bottom: String, originalImage: UIImage, board: Board, memedImage: UIImage) {
+    init?(top: String, bottom: String, originalImage: UIImage, board: Board, memedImage: UIImage, time: String) {
         // Initialize stored properties.
         self.top = top
         self.bottom = bottom
         self.memedImage = memedImage
         self.originalImage = originalImage
         self.board = board
+        self.time = time
         
         super.init()
 }
@@ -46,6 +48,7 @@ class Memes: NSObject, NSCoding {
         aCoder.encodeObject(originalImage, forKey:  PropertyKey.originalImage)
         aCoder.encodeObject(board, forKey: PropertyKey.boardKey)
         aCoder.encodeObject(memedImage, forKey: PropertyKey.memedImageKey)
+        aCoder.encodeObject(time, forKey: PropertyKey.timeKey)
         
     }
     
@@ -55,8 +58,9 @@ class Memes: NSObject, NSCoding {
         let originalImage = aDecoder.decodeObjectForKey(PropertyKey.originalImage) as! UIImage
         let board = aDecoder.decodeObjectForKey(PropertyKey.boardKey) as! Board
         let memedImage = aDecoder.decodeObjectForKey(PropertyKey.memedImageKey) as! UIImage
+        let time = aDecoder.decodeObjectForKey(PropertyKey.timeKey) as! String
         
-        self.init(top: top, bottom: bottom, originalImage: originalImage, board: board, memedImage: memedImage)
+        self.init(top: top, bottom: bottom, originalImage: originalImage, board: board, memedImage: memedImage, time:time)
     }
     
 }

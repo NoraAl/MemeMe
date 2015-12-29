@@ -46,10 +46,10 @@ func saveAllMemes() {
 }
 
 func loadMemess() -> [Memes]? {
-    /* //reset persistent Data"
+     /*//reset persistent Data"
     allMemes.removeAll()
-    NSKeyedArchiver.archiveRootObject(allMemes, toFile: Memes.ArchiveURL.path!)
-    */
+    NSKeyedArchiver.archiveRootObject(allMemes, toFile: Memes.ArchiveURL.path!)*/
+    
     return NSKeyedUnarchiver.unarchiveObjectWithFile(Memes.ArchiveURL.path!) as? [Memes]
 }
 

@@ -14,18 +14,16 @@ class MemeTableViewController: UITableViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = editButtonItem()
-        
+        self.tableView.backgroundColor = myBackgroundColor
         if let loadedMemes = loadMemess(){
             allMemes = loadedMemes
         } else {
-            //if no memes return empty array
             allMemes = [Memes]()
         }
     }
     
     override func viewWillAppear(animated: Bool) {
-        
-       //self.tableView.reloadData()
+        tableView.reloadData()
     }
     
     // MARK: - Table view data source
@@ -38,9 +36,10 @@ class MemeTableViewController: UITableViewController
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MemeTableCell
         
         let memeObject = allMemes[indexPath.row]
-        cell.cellTopText.text = memeObject.top
-        cell.cellBottomText.text = memeObject.bottom
         cell.imageView?.image = memeObject.memedImage
+        cell.cellTopText?.text = memeObject.top
+        cell.cellBottomText?.text = memeObject.bottom
+        cell.cellDateText?.text = memeObject.time
 
         return cell
     }
@@ -70,12 +69,10 @@ class MemeTableViewController: UITableViewController
         if let sourceViewController = sender.sourceViewController as? MemeEditorViewController, meme = sourceViewController.newMeme {
             let newIndexPath = NSIndexPath(forRow: allMemes.count, inSection: 0)
             allMemes.append(meme)
+            saveAllMemes()
             tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
             
-            saveAllMemes()
+            
         }
     }
 }
-
-
-

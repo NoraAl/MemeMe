@@ -39,11 +39,11 @@ class MemeCollectionViewController: UICollectionViewController {
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
         switch UIDevice.currentDevice().orientation{
         case .Portrait, .PortraitUpsideDown:
-            heightToWidthtRatio = view.frame.height / view.frame.width
+            heightToWidthtRatio = view.frame.height/view.frame.width
         case .LandscapeLeft,  .LandscapeRight:
-            heightToWidthtRatio = view.frame.height / view.frame.width
+            heightToWidthtRatio = view.frame.height/view.frame.width
         default:
-            heightToWidthtRatio = 1.0
+            heightToWidthtRatio = view.frame.height/view.frame.width
         }
         
         collectionView?.reloadData()

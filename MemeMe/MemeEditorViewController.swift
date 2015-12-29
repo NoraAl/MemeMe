@@ -146,6 +146,8 @@ class MemeEditorViewController: UIViewController{
         show(.boardView(false))
         show(.mainView(true))
         board.brush = nil
+        view.bringSubviewToFront(topBar)
+        view.bringSubviewToFront(bottomBar)
     }
     
     @IBAction func draw(sender: UIBarButtonItem) {
@@ -204,7 +206,9 @@ class MemeEditorViewController: UIViewController{
     }
     
     func save(){
-        newMeme = Memes(top: self.topTextField.text!, bottom: self.bottomTextField.text!, originalImage: imageView.image!, board: self.board, memedImage: memedImage!)
+        let currentTime = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .MediumStyle, timeStyle: .ShortStyle)
+
+        newMeme = Memes(top: self.topTextField.text!, bottom: self.bottomTextField.text!, originalImage: imageView.image!, board: self.board, memedImage: memedImage!,time: currentTime)
     }
     
 }

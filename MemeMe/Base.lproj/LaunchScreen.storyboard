@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="J45-h2-TNa">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch1" translatesAutoresizingMaskIntoConstraints="NO" id="J45-h2-TNa">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             </imageView>
                         </subviews>
@@ -58,6 +58,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch" width="576" height="1008"/>
+        <image name="launch1" width="550" height="1008"/>
     </resources>
 </document>
