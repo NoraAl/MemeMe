@@ -21,7 +21,6 @@ class MemeTableCell: UITableViewCell {
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
-        //super.setSelected(selected, animated: animated)
         backgroundColor = selected ? highlightedColor : myBackgroundColor
 
     }

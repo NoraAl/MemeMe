@@ -20,6 +20,12 @@ class MemeDetail: UIViewController{
             detailViewImage.image = memeDetail.memedImage
         }
     }
+    override func shouldAutorotate() -> Bool {
+        return true    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.All
+    }
 
     @IBAction func editCurrentMeme(sender: UIBarButtonItem) {
         let storyboard = UIStoryboard (name: "Main", bundle: nil)

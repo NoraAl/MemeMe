@@ -23,6 +23,7 @@ class MemeEditorViewController: UIViewController{
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var drawButton: UIBarButtonItem!
     
+    
     let imagePickerDelegate = ImagePicker()
     let textFieldDelegate = TextField()
     var memedImage: UIImage?
@@ -34,6 +35,14 @@ class MemeEditorViewController: UIViewController{
         case boardView(Bool)
     }
     
+    override func shouldAutorotate() -> Bool {
+        return true
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.All
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -74,25 +83,9 @@ class MemeEditorViewController: UIViewController{
         drawButton.enabled = true
     }
     
-    override func shouldAutorotate() -> Bool {
-        if (UIDevice.currentDevice().orientation == UIDeviceOrientation.LandscapeLeft ||
-            UIDevice.currentDevice().orientation == UIDeviceOrientation.LandscapeRight ||
-            UIDevice.currentDevice().orientation == UIDeviceOrientation.Unknown) {
-                return false
-        }
-        else {
-            return true
-        }
-    }
-    
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return [UIInterfaceOrientationMask.Portrait ,UIInterfaceOrientationMask.PortraitUpsideDown]
-    }
-    
     override func viewWillAppear(animated: Bool) {
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         subscribeToKeyboardNotifications()
-
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -101,7 +94,7 @@ class MemeEditorViewController: UIViewController{
     }
     
     func keyboardWillShow(notification: NSNotification){
-        if  bottomTextIsBeingEdited{
+        if  bottomTextIsBeingEdited {
             view.frame.origin.y -= getKeyboardHeight(notification)}
     }
     
@@ -137,9 +130,10 @@ class MemeEditorViewController: UIViewController{
 
     @IBAction func shareAction(sender: UIBarButtonItem) {
         memedImage = generateMemedImage()
+        
         let shareViewController = UIActivityViewController(activityItems: [memedImage!], applicationActivities: nil)
         presentViewController(shareViewController, animated: true, completion: nil)
-        shareViewController.completionWithItemsHandler = { (_:String?, completed:Bool, _:[AnyObject]?, error:NSError?)->Void in
+        shareViewController.completionWithItemsHandler = { activityType, completed, returnedItems, activityError in
             if completed {
                 self.save()
                 self.performSegueWithIdentifier("dismissMemeEditor", sender: self)
@@ -147,8 +141,8 @@ class MemeEditorViewController: UIViewController{
                 self.newMeme = nil// if comes from existing meme, don't add it
                 self.performSegueWithIdentifier("dismissMemeEditor", sender: self)
             }
-            if let error = error {
-                print("\(error)")
+            if let activityError = activityError {
+                print("\(activityError)")
             }
         }
     }
@@ -263,3 +257,9 @@ extension MemeEditorViewController
 
 }
 
+extension UIActivityViewController{
+    override public func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.All
+    }
+
+}

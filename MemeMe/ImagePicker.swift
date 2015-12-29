@@ -31,10 +31,11 @@ class ImagePicker:  NSObject, ImagePickerProtocol, UIImagePickerControllerDelega
         } else {
             imagePickerViewController.sourceType = UIImagePickerControllerSourceType.Camera
         }
+        
         viewController.presentViewController(imagePickerViewController, animated: true, completion: nil)
     }
     
-    // UIImagePickerControllerDelegate mehtods
+    // MARK: imagePicker delegate mehtods
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]){
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.image = image
@@ -47,5 +48,11 @@ class ImagePicker:  NSObject, ImagePickerProtocol, UIImagePickerControllerDelega
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController){
         picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+
+extension UIImagePickerController{
+    override public func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.AllButUpsideDown
     }
 }

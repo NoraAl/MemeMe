@@ -33,7 +33,6 @@ extension NSParagraphStyle {
     }
 }
 
-
 // MARK: global array that holds all sent or saved memes
 var allMemes = [Memes]()
 
@@ -46,10 +45,6 @@ func saveAllMemes() {
 }
 
 func loadMemess() -> [Memes]? {
-     /*//reset persistent Data"
-    allMemes.removeAll()
-    NSKeyedArchiver.archiveRootObject(allMemes, toFile: Memes.ArchiveURL.path!)*/
-    
     return NSKeyedUnarchiver.unarchiveObjectWithFile(Memes.ArchiveURL.path!) as? [Memes]
 }
 

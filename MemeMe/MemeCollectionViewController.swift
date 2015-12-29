@@ -35,17 +35,20 @@ class MemeCollectionViewController: UICollectionViewController {
         collectionView?.reloadData()
     }
     
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.All
+    }
+    
     // MARK: Handling orientation change
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
         switch UIDevice.currentDevice().orientation{
-        case .Portrait, .PortraitUpsideDown:
-            interfaceOrientation.isPortrait
-        case .LandscapeLeft,  .LandscapeRight:
-            interfaceOrientation.isLandscape
+        case .Portrait:
+             heightToWidthtRatio = view.frame.height/view.frame.width
+        case .LandscapeLeft:
+            heightToWidthtRatio = view.frame.height/view.frame.width
         default:
             heightToWidthtRatio = view.frame.height/view.frame.width
         }
-        
         collectionView?.reloadData()
     }
     
@@ -55,26 +58,24 @@ class MemeCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
         let cellIdentifier = "MemeCollectionCell"
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! CollectionViewCell
         
         let memeObject = allMemes[indexPath.row]
         cell.imageView.image = memeObject.memedImage
-        
+        print(cell.imageView?.frame.width)
         return cell
     }
     
     // MARK: Navigaiton
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath:NSIndexPath)
-    {
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath:NSIndexPath) {
         let storyboard = UIStoryboard (name: "Main", bundle: nil)
         let memeDetailViewController  = storyboard.instantiateViewControllerWithIdentifier("MemeDetail") as! MemeDetail
         memeDetailViewController.memeDetail = allMemes[indexPath.row]
         
         navigationController!.pushViewController(memeDetailViewController, animated: true)
-        
     }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "collectionToMemeEditor"{
             dismissViewControllerAnimated(false, completion: nil)
