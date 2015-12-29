@@ -74,6 +74,21 @@ class MemeEditorViewController: UIViewController{
         drawButton.enabled = true
     }
     
+    override func shouldAutorotate() -> Bool {
+        if (UIDevice.currentDevice().orientation == UIDeviceOrientation.LandscapeLeft ||
+            UIDevice.currentDevice().orientation == UIDeviceOrientation.LandscapeRight ||
+            UIDevice.currentDevice().orientation == UIDeviceOrientation.Unknown) {
+                return false
+        }
+        else {
+            return true
+        }
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return [UIInterfaceOrientationMask.Portrait ,UIInterfaceOrientationMask.PortraitUpsideDown]
+    }
+    
     override func viewWillAppear(animated: Bool) {
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         subscribeToKeyboardNotifications()
@@ -136,6 +151,10 @@ class MemeEditorViewController: UIViewController{
                 print("\(error)")
             }
         }
+    }
+    
+    @IBAction func cancelAction(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func undoAction(sender: UIButton) {
@@ -208,7 +227,7 @@ class MemeEditorViewController: UIViewController{
     func save(){
         let currentTime = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .MediumStyle, timeStyle: .ShortStyle)
 
-        newMeme = Memes(top: self.topTextField.text!, bottom: self.bottomTextField.text!, originalImage: imageView.image!, board: self.board, memedImage: memedImage!,time: currentTime)
+        newMeme = Memes(top: topTextField.text!, bottom: bottomTextField.text!, originalImage: imageView.image!, board: board, memedImage: memedImage!,time: currentTime)
     }
     
 }
@@ -217,22 +236,22 @@ extension MemeEditorViewController
 {
     func virtualView() -> UIView{
         
-        let virtualView = UIView(frame: self.view.frame)
-        virtualView.backgroundColor = self.view.backgroundColor
+        let virtualView = UIView(frame: view.frame)
+        virtualView.backgroundColor = view.backgroundColor
         
-        let virtualImageView = UIImageView(frame: self.imageView.frame)
+        let virtualImageView = UIImageView(frame: imageView.frame)
         virtualImageView.contentMode = .ScaleAspectFit
-        virtualImageView.image = self.imageView.image
+        virtualImageView.image = imageView.image
         
-        let virtualTop = UITextField(frame: self.topTextField.frame)
-        virtualTop.defaultTextAttributes = self.topTextField.defaultTextAttributes
-        virtualTop.text = self.topTextField.text
+        let virtualTop = UITextField(frame: topTextField.frame)
+        virtualTop.defaultTextAttributes = topTextField.defaultTextAttributes
+        virtualTop.text = topTextField.text
         
-        let virtualBottom = UITextField(frame: self.bottomTextField.frame)
-        virtualBottom.defaultTextAttributes = self.bottomTextField.defaultTextAttributes
-        virtualBottom.text = self.bottomTextField.text
+        let virtualBottom = UITextField(frame: bottomTextField.frame)
+        virtualBottom.defaultTextAttributes = bottomTextField.defaultTextAttributes
+        virtualBottom.text = bottomTextField.text
         
-        let virtualBoard = UIImageView(image: self.board.image)
+        let virtualBoard = UIImageView(image: board.image)
         
         virtualView.addSubview(virtualImageView)
         virtualView.addSubview(virtualBoard)

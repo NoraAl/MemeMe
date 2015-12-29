@@ -157,7 +157,7 @@ class Board: UIImageView {
             }
             UIGraphicsEndImageContext()
             if drawingState == .Ended {
-                boardUndoManager.addImage(self.image!)
+                boardUndoManager.addImage(image!)
             }
             image = previewImage
             brush.lastPoint = brush.endPoint

@@ -23,7 +23,7 @@ class MemeCollectionViewController: UICollectionViewController {
         let space: CGFloat = 2.0
         let numberOfCells = 3
         
-        let cellWidth = (self.view.frame.size.width-((CGFloat(numberOfCells)-1) * space))/CGFloat (numberOfCells)
+        let cellWidth = (view.frame.size.width-((CGFloat(numberOfCells)-1) * space))/CGFloat (numberOfCells)
         let cellHeight = cellWidth * heightToWidthtRatio
         
         flowLayout.minimumInteritemSpacing = space
@@ -39,9 +39,9 @@ class MemeCollectionViewController: UICollectionViewController {
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
         switch UIDevice.currentDevice().orientation{
         case .Portrait, .PortraitUpsideDown:
-            heightToWidthtRatio = view.frame.height/view.frame.width
+            interfaceOrientation.isPortrait
         case .LandscapeLeft,  .LandscapeRight:
-            heightToWidthtRatio = view.frame.height/view.frame.width
+            interfaceOrientation.isLandscape
         default:
             heightToWidthtRatio = view.frame.height/view.frame.width
         }
@@ -77,7 +77,7 @@ class MemeCollectionViewController: UICollectionViewController {
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "collectionToMemeEditor"{
-            self.dismissViewControllerAnimated(false, completion: nil)
+            dismissViewControllerAnimated(false, completion: nil)
         }
     }
     

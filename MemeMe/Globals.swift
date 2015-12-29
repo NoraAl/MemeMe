@@ -18,10 +18,10 @@ get { return bottomTextIsBeingEdited }
 
 extension UIButton{
     func shadow(){
-        self.layer.shadowRadius  = 0.65
-        self.layer.shadowOffset = CGSize(width: 3, height: 0)
-        self.layer.shadowOpacity = 0.85
-        self.layer.shadowColor = UIColor.whiteColor().CGColor
+        layer.shadowRadius  = 0.65
+        layer.shadowOffset = CGSize(width: 3, height: 0)
+        layer.shadowOpacity = 0.85
+        layer.shadowColor = UIColor.whiteColor().CGColor
     }
 }
 

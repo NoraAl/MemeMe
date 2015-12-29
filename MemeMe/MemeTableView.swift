@@ -14,7 +14,7 @@ class MemeTableViewController: UITableViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = editButtonItem()
-        self.tableView.backgroundColor = myBackgroundColor
+        tableView.backgroundColor = myBackgroundColor
         if let loadedMemes = loadMemess(){
             allMemes = loadedMemes
         } else {
@@ -58,7 +58,7 @@ class MemeTableViewController: UITableViewController
 
     // MARK: - Navigation
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let memeDetailViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetail") as! MemeDetail
+        let memeDetailViewController  = storyboard?.instantiateViewControllerWithIdentifier("MemeDetail") as! MemeDetail
         memeDetailViewController.memeDetail = allMemes[indexPath.row]
         
         navigationController!.pushViewController(memeDetailViewController, animated: true)
